@@ -3,7 +3,7 @@
 require_once "Persistencia/Conexion.php";
 require_once "Persistencia/TiendaProductoDAO.php";
 
-class Producto{
+class TiendaProducto{
     private $idProducto;
     private $idTienda;
     private $cantidad;
@@ -14,7 +14,7 @@ class Producto{
         $this -> idProducto = $idProducto;
         $this -> idTienda = $idTienda;
         $this -> cantidad = $cantidad;
-        $this -> TiendaProductoDAO = new TiendaProductoDAO($idProducto, $idtienda, $cantidad);
+        $this -> TiendaProductoDAO = new TiendaProductoDAO($idProducto, $idTienda, $cantidad);
         $this -> Conexion = new Conexion();
     }
     /*
@@ -24,12 +24,12 @@ class Producto{
         return $this -> idProducto;
     }
 
-    public function geidtienda(){
-        return $this -> nombre;
+    public function getIdTienda(){
+        return $this -> idTienda;
     }
 
-    public function getDireccion(){
-        return $this -> precio;
+    public function getCantidad(){
+        return $this -> cantidad;
     }
 
     
@@ -42,12 +42,12 @@ class Producto{
         $this -> idProducto = $idProducto;
     }
 
-    public function setNombre($nombre){
-        $this -> nombre = $nombre;
+    public function setidTienda($idTienda){
+        $this -> idTienda = $idTienda;
     }
 
-    public function getPrecio($precio){
-        $this -> precio = $precio;
+    public function setCantidad($cantidad){
+        $this -> cantidad = $cantidad;
     }
     /* 
     *   methods
@@ -55,37 +55,36 @@ class Producto{
 
     public function insertar(){
         $this -> Conexion -> abrir();
-        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> insertar());
+        $this -> Conexion -> ejecutar( $this -> TiendaProductoDAO -> insertar());
         $res = $this -> Conexion -> filasAfectadas();
         $this -> Conexion -> cerrar();
         return $res;
     }
 
-    /*
-     * Función que busca por paginación, filtro de palabra y devuelve la información en un array
-     */
-    public function filtroPaginado($str, $pag, $cant){
+    public function consultarReporte(){
         $this -> Conexion -> abrir();
-        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroPaginado($str, $pag, $cant));
-        $resList = Array();
+        //echo $this -> TiendaProductoDAO -> consultarReporte();
+        $this -> Conexion -> ejecutar( $this -> TiendaProductoDAO -> consultarReporte());
+        $resList = array();
         while($res = $this -> Conexion -> extraer()){
-            array_push($resList, $res);
+            array_push($resList, new TiendaProducto($res[0], "", $res[1]));
         }
         $this -> Conexion -> cerrar();
 
         return $resList;
     }
 
-    /*
-     * Busca la cantidad de registros con filtro de palabra
-     */
-    public function filtroCantidad($str){
+    public function consultarReporteProducto(){
         $this -> Conexion -> abrir();
-        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> filtroCantidad($str));
-        $res = $this -> Conexion -> extraer();
+        //echo $this -> TiendaProductoDAO -> consultarReporte();
+        $this -> Conexion -> ejecutar( $this -> TiendaProductoDAO -> consultarReporteProducto());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new TiendaProducto("", $res[0], $res[1]));
+        }
         $this -> Conexion -> cerrar();
 
-        return $res[0];
+        return $resList;
     }
     
 }

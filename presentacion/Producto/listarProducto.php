@@ -6,7 +6,7 @@
         <div class="col-12 col-md-12 col-lg-11 col-xl-11">
             <div class="card">
                 <div class="card-header bg-dark d-flex flex-row justify-content-between">
-                    <a href="index.php?pid=<?php echo base64_encode("presentacion/Inventario/crearInventario.php") ?>"><button type="button" class="btn btn-outline-light">Agregar inventario</button></a>
+                    <a href="index.php?pid=<?php echo base64_encode("presentacion/TiendaProductos/crearInventario.php")?>"><button type="button" class="btn btn-outline-light">Agregar inventario</button></a>
                     <select id="select-cantidad">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -197,7 +197,7 @@
                     <td>${data[1]}</td>
                     <td>${data[2]}</td>
                     <td style='display:flex; justify-content:center;'>
-                        
+                        <a href="reporteTiendaProducto.php?idProducto=${data[0]}" target="__black" ><i class="far fa-file"></i></a>
                     </td>
                 </tr>`
             );

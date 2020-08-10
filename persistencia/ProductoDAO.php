@@ -19,8 +19,14 @@ class ProductoDAO{
     *   methods
     */
 
-    public function getAll(){
+    public function getInfo(){
         return "SELECT idProducto, nombre, precio
+                FROM Producto
+                WHERE idProducto = ". $this -> idProducto;
+    }
+
+    public function getAll(){
+        return "SELECT idProducto, nombre
                 FROM Producto";
     }
 

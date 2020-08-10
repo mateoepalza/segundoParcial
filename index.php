@@ -2,6 +2,7 @@
 
 require_once "logica/Producto.php";
 require_once "logica/Tienda.php";
+require_once "logica/TiendaProducto.php";
 
 if(isset($_GET["pid"])){
     $pid = base64_decode($_GET["pid"]);    

@@ -15,3 +15,28 @@ create table Tienda(
 	direccion varchar(100) not null,
     primary key (idTienda)
 );
+
+create table TiendaProducto(
+	FK_idProducto int not null,
+    FK_idTienda int not null,
+    cantidad int not null,
+    primary key(FK_idProducto, FK_idTienda),
+    foreign key (FK_idProducto) references Producto (idProducto),
+    foreign key (FK_idTienda) references Tienda (idTienda)
+);
+
+
+insert into Producto (nombre, precio) values ('Arroz','2000');
+insert into Producto (nombre, precio) values ('Maiz','5000');
+insert into Producto (nombre, precio) values ('Cocacola','1500');
+insert into Producto (nombre, precio) values ('Frijoles','6000');
+insert into Producto (nombre, precio) values ('Arveja','3000');
+insert into Producto (nombre, precio) values ('Papa','4000');
+insert into Producto (nombre, precio) values ('Café','6000');
+
+insert into Tienda (nombre, direccion) values ('Sede A','calle 11');
+insert into Tienda (nombre, direccion) values ('Sede B','calle 12');
+insert into Tienda (nombre, direccion) values ('Sede C','calle 13');
+insert into Tienda (nombre, direccion) values ('Sede D','calle 14');
+insert into Tienda (nombre, direccion) values ('Sede E','calle 15');
+insert into Tienda (nombre, direccion) values ('Sede F','calle 16');

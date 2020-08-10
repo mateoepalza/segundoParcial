@@ -28,7 +28,7 @@ class Producto{
         return $this -> nombre;
     }
 
-    public function getDireccion(){
+    public function getPrecio(){
         return $this -> precio;
     }
 
@@ -46,12 +46,34 @@ class Producto{
         $this -> nombre = $nombre;
     }
 
-    public function getPrecio($precio){
+    public function setPrecio($precio){
         $this -> precio = $precio;
     }
     /* 
     *   methods
     */
+
+    public function getAll(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> ProductoDAO -> getAll());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Producto($res[0], $res[1]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    
+    public function getInfo(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> ProductoDAO -> getInfo());
+        $res = $this -> Conexion -> extraer();
+        $this -> nombre = $res[1];
+        $this -> precio = $res[2];
+        $this -> Conexion -> cerrar();
+    }
 
     public function insertar(){
         $this -> Conexion -> abrir();

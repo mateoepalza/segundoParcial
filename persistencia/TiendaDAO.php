@@ -17,7 +17,10 @@ class TiendaDAO{
     /* 
     *   methods
     */
-
+    public function getAll(){
+        return "SELECT idTienda, nombre
+                FROM Tienda";
+    }
     public function insertar(){
         return "INSERT INTO Tienda (nombre, direccion) 
                 VALUES ('" . $this -> nombre ."', '" . $this -> direccion  ."')";
@@ -34,6 +37,12 @@ class TiendaDAO{
         return "SELECT count(*) 
                 FROM Tienda
                 WHERE nombre like '%". $str ."%'  OR direccion like '%" . $str . "%'";
+    }
+
+    public function getInfo(){
+        return "SELECT idTienda, nombre, direccion
+                FROM Tienda
+                WHERE idTienda = ". $this -> idTienda;
     }
 }
 ?>

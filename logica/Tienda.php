@@ -52,6 +52,28 @@ class Tienda{
     /* 
     *   methods
     */
+
+    public function getAll(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar( $this -> TiendaDAO -> getAll());
+        $resList = array();
+        while($res = $this -> Conexion -> extraer()){
+            array_push($resList, new Tienda($res[0], $res[1]));
+        }
+        $this -> Conexion -> cerrar();
+
+        return $resList;
+    }
+
+    public function getInfo(){
+        $this -> Conexion -> abrir();
+        $this -> Conexion -> ejecutar($this -> TiendaDAO -> getInfo());
+        $res = $this -> Conexion -> extraer();
+        $this -> nombre = $res[1];
+        $this -> direccion = $res[2];
+        $this -> Conexion -> cerrar();
+    }
+
     public function insertar(){
         $this -> Conexion -> abrir();
         $this -> Conexion -> ejecutar( $this -> TiendaDAO -> insertar());
