@@ -14,7 +14,7 @@ class Producto{
         $this -> idProducto = $idProducto;
         $this -> idTienda = $idTienda;
         $this -> cantidad = $cantidad;
-        $this -> ProductoDAO = new ProductoDAO($idProducto, $nombre, $precio);
+        $this -> TiendaProductoDAO = new TiendaProductoDAO($idProducto, $idtienda, $cantidad);
         $this -> Conexion = new Conexion();
     }
     /*
@@ -24,7 +24,7 @@ class Producto{
         return $this -> idProducto;
     }
 
-    public function getNombre(){
+    public function geidtienda(){
         return $this -> nombre;
     }
 
